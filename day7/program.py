@@ -1,4 +1,4 @@
-from LanternFish import LanternFish
+from Whales import Whales
 
 file = "input.txt"
 
@@ -7,12 +7,8 @@ with open(file) as input_file:
     input = [int(n) for n in numbers[0].split(",")]
 
 
-fish = LanternFish(input)
+whales = Whales(input)
 
+print(whales.lowest_fuel())
 
-print(input)
-fish_count = fish.days(80)
-print(fish_count)
-
-fish_count = fish.days(256)
-print(fish_count)
+print(whales.lowest_fuel(exponential_cost=True))
