@@ -41,4 +41,28 @@ def test_decode_pattern():
 
 def test_pattern():
     assert Pattern.length[0] == 6
-    assert Pattern.contained[0] == [1, 8, 7]
+    assert Pattern.contained[0] == [8]
+
+
+expected = {
+    "acedgfb": 8,
+    "cdfbe": 5,
+    "gcdfa": 2,
+    "fbcad": 3,
+    "dab": 7,
+    "cefabd": 9,
+    "cdfgeb": 6,
+    "eafb": 4,
+    "cagedb": 0,
+    "ab": 1,
+}
+
+test = {
+    # 8: "1111111",
+    1: "1100000",
+    4: "1111000",
+
+    7: "1010010"
+    0: "1110111"
+
+}

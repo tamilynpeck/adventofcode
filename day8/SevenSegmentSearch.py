@@ -2,24 +2,26 @@ class Pattern:
     length = {0: 6, 1: 2, 2: 5, 3: 5, 4: 4, 5: 5, 6: 6, 7: 3, 8: 7, 9: 6}
     legnth_in = {5: [2, 3, 5], 6: [0, 6, 9]}
     contained = {
-        0: [8],
         2: [8],
         3: [8],
         5: [6, 8],
+        0: [8],
         6: [8],
         9: [8],
     }
     contains = {
-        0: [1, 7],
         2: [],
         3: [1, 7],
-        5: [6, 8],
+        5: [],
+        0: [1, 7],
         6: [],
         9: [1, 4, 7],
     }
 
     def __init__(self, codes):
-        self.number_logic = {
+        self.codes = codes
+        self.key = {}
+        self.functions = {
             1: lambda x: self.matching_length(2),  # fix magic numbers...
             4: lambda x: self.matching_length(4),
             7: lambda x: self.matching_length(3),
@@ -28,30 +30,49 @@ class Pattern:
             6: lambda x: self.matching_two_and_six(6),
             # 6,
         }
-
-        self.codes = codes
-        self.key = {}
-        for key, func in self.number_logic.items():
-            code = func(codes)
-            self.key[code] = key
+        for key, function in self.functions.items():
+            code = function(key)
+            self.key[key] = code
             print(self.key)
+        self.key = {value: key for key, value in self.key.items()}
+        print(self.key)
 
     def matching_length(self, legnth: int):
         return [code for code in self.codes if len(code) == legnth][0]
 
     def matching_two_and_six(self, number):
         expected_length = Pattern.length[number]
-        remaining = [
-            code
-            for code in self.codes
-            # if code not in self.key and len(code) == expected_length
-            if len(code) == expected_length
-        ]
+        remaining = [code for code in self.codes if len(code) == expected_length]
         # options = Pattern.legnth_in[Pattern.length[number]]
         for code in remaining:
-            code
-        print(remaining)
-        return remaining[0]
+            print("for code", code)
+            contains_pattern = [
+                k for k, v in self.key.items() if Pattern.contains_values(code, v)
+            ]
+            for value in Pattern.legnth_in[expected_length]:
+                if contains_pattern == Pattern.contains[value]:
+                    return code
+            print(contains_pattern)
+
+        return None
+
+    def contains_values(value1, value2):
+        print(value1, value2)
+        if len(value1) < len(value2):
+            return False
+        for letter in value2:
+            if letter not in [l for l in value1]:
+                return False
+        return True
+
+    def contained_in(value1, value2):
+        print(value1, value2)
+        if len(value1) > len(value2):
+            return False
+        for letter in value2:
+            if letter not in [l for l in value1]:
+                return False
+        return True
 
 
 class SevenSegmentSearch:
