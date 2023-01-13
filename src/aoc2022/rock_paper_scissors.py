@@ -1,4 +1,4 @@
-from FileReader import FileReader
+from common.FileReader import FileReader
 
 
 class ScoreCalculator:
@@ -6,7 +6,14 @@ class ScoreCalculator:
     loser_of_action = {v: k for k, v in winner_of_action.items()}
 
     def __init__(self):
-        self.action_mapping = {"A": "Rock", "B": "Paper", "C": "Scissors", "X": "Rock", "Y": "Paper", "Z": "Scissors"}
+        self.action_mapping = {
+            "A": "Rock",
+            "B": "Paper",
+            "C": "Scissors",
+            "X": "Rock",
+            "Y": "Paper",
+            "Z": "Scissors",
+        }
         self.result_mapping = {"X": "Lose", "Y": "Draw", "Z": "Win"}
         self.score_mapping = {
             "Rock": 1,
@@ -38,16 +45,17 @@ class ScoreCalculator:
 
         "Lost"
 
-
     def score_part2(self, first_value, second_value):
         score = 0
         opponent_action = self.action_mapping.get(first_value)
         expected_result = self.result_mapping.get(second_value)
         print(expected_result)
-        
+
         score += self.score_mapping.get(expected_result)
 
-        expected_action = ScoreCalculator.action_for_expected_result(opponent_action, expected_result)
+        expected_action = ScoreCalculator.action_for_expected_result(
+            opponent_action, expected_result
+        )
         score += self.score_mapping.get(expected_action)
 
         return score
@@ -66,20 +74,15 @@ class ScoreCalculator:
 def rock_paper_scissors(input_file, default_calc=True):
     data = FileReader.read_txt(input_file)
     guide = [[line[0], line[2]] for line in data]
-    
+
     calculator = ScoreCalculator()
     score = 0
 
     for round in guide:
-        score += calculator.score(round[0], round[1]) if default_calc else calculator.score_part2(round[0], round[1])
+        score += (
+            calculator.score(round[0], round[1])
+            if default_calc
+            else calculator.score_part2(round[0], round[1])
+        )
 
     return score
-
-
-if __name__ == "__main__":
-    PUZZLE_INPUT_FILE = "input.txt"
-    result = rock_paper_scissors(PUZZLE_INPUT_FILE)
-    print(result)
-
-    result = rock_paper_scissors(PUZZLE_INPUT_FILE, default_calc=False)
-    print(result)
