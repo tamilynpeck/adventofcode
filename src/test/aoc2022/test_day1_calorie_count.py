@@ -1,4 +1,4 @@
-from aoc2022.calorie_counting import calorie_counting
+from aoc2022.day1_calorie_counting import calorie_counting
 
 
 def test_elf_with_most_calories():

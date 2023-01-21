@@ -14,8 +14,8 @@ class Elf:
         return sum(self.item_calories)
 
 
-def calorie_counting(input_file, top=1):
-    input = FileReader.read_txt(input_file)
+def calorie_counting(input_file, top=1, file_reader=FileReader()):
+    input = file_reader.read_txt(input_file)
     data = [int(line) if line.isnumeric() else None for line in input]
 
     elves = []
