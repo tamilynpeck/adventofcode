@@ -13,8 +13,7 @@ print("calorie_counting part 2", result)
 # 204610
 
 ## DAY 2
-
-PUZZLE_INPUT_FILE = "year2022_day2.txt"
+PUZZLE_INPUT_FILE = "202202.txt"
 result = rock_paper_scissors(PUZZLE_INPUT_FILE)
 print("rock_paper_scissors part 1", result)
 # 14069

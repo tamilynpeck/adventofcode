@@ -2,7 +2,7 @@ from common.FileReader import FileReader
 
 
 class GameManager:
-    winner_of_action = {"Rock": "Scissors", "Scissors": "Paper", "Paper": "Rock"}
+    winner_of_action = {"Rock": "Paper", "Scissors": "Rock", "Paper": "Scissors"}
     loser_of_action = {v: k for k, v in winner_of_action.items()}
 
     @staticmethod
@@ -42,9 +42,13 @@ class ScoreCalculator:
     def score(action, result):
         if not action or not result:
             raise Exception("score", action, result)
-        return ScoreCalculator.score_mapping.get(
-            action
-        ) + ScoreCalculator.score_mapping.get(result)
+
+        action_score = ScoreCalculator.score_mapping.get(action)
+        print(action, action_score)
+        result_score = ScoreCalculator.score_mapping.get(result)
+        print(result, result_score)
+
+        return action_score + result_score
 
 
 class ActionsGuideEngine:

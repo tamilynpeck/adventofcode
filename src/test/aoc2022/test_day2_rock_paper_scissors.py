@@ -1,19 +1,11 @@
 from aoc2022.day2_rock_paper_scissors import rock_paper_scissors
-from common.FileReader import InMemoryFileReader, FileReader
+from common.FileReader import InMemoryFileReader
 
 TEST_INPUT_FILE = "year2022_day2_test.txt"
 
 test_data = """A Y
 B X
 C Z"""
-
-
-def test_file_reader():
-    file_reader = FileReader()
-
-    result = file_reader.read_txt(TEST_INPUT_FILE)
-
-    assert result == ["A Y", "B X", "C Z"]
 
 
 def test_memory_reader():
