@@ -17,7 +17,7 @@ class GameManager:
 
     @staticmethod
     def action_for_expected_result(opponent_action, expected_result):
-        print(opponent_action, expected_result)
+        # print(opponent_action, expected_result)
         if expected_result == "Draw":
             return opponent_action
 
@@ -44,9 +44,9 @@ class ScoreCalculator:
             raise Exception("score", action, result)
 
         action_score = ScoreCalculator.score_mapping.get(action)
-        print(action, action_score)
+        # print(action, action_score)
         result_score = ScoreCalculator.score_mapping.get(result)
-        print(result, result_score)
+        # print(result, result_score)
 
         return action_score + result_score
 
