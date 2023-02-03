@@ -2,7 +2,7 @@ from aoc2022.day1_calorie_counting import calorie_counting
 from aoc2022.day2_rock_paper_scissors import rock_paper_scissors
 
 ## DAY 1
-PUZZLE_INPUT_FILE = "year2022_day1.txt"
+PUZZLE_INPUT_FILE = "202201.txt"
 
 result = calorie_counting(PUZZLE_INPUT_FILE)
 print("calorie_counting part 1", result)
