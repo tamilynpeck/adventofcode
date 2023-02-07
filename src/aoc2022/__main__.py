@@ -26,3 +26,11 @@ print("rucksack_reorganization part 1", result)
 
 result = rucksack_reorganization.group_badge_item_priority_sum()
 print("rucksack_reorganization part 2", result)
+
+from aoc2022.day4_camp_cleanup import CampCleanup
+
+result = CampCleanup().find_fully_overlapping()
+print("camp_cleanup part 1", result)
+
+result = CampCleanup().find_overlapping()
+print("camp_cleanup part 2", result)

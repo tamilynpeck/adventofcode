@@ -20,3 +20,11 @@ def test_part_one_fully_overlapping():
     result = camp_cleanup.find_fully_overlapping()
 
     assert result == 2
+
+
+def test_part_two_is_overlapping():
+    camp_cleanup = CampCleanup(file_name=file_name, file_reader=file_reader)
+
+    result = camp_cleanup.find_overlapping()
+
+    assert result == 4
