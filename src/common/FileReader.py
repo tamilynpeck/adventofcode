@@ -10,9 +10,7 @@ class FileReader:
         file_path = Path(self.base_path, file)
 
         with open(file_path) as input_file:
-            data = [line.strip() for line in input_file.readlines()]
-
-        return data
+            return input_file.readlines()
 
 
 class InMemoryFileReader:
@@ -23,9 +21,7 @@ class InMemoryFileReader:
         if str(file) not in self.files:
             return None
 
-        data = [line.strip() for line in self.files[file].splitlines()]
-
-        return data
+        return self.files[file].splitlines()
 
     def setup(self, file, data):
         self.files[file] = data
