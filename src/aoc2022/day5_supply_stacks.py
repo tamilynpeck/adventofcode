@@ -5,11 +5,6 @@ from common.FileReader import FileReader
 #     def __init__(self, row):
 #         self.row = row
 
-test_data = """    [D]
-[N] [C]
-[Z] [M] [P]
- 1   2   3"""
-
 
 class Stacks:
     def __init__(self, crate_data):
@@ -17,25 +12,36 @@ class Stacks:
 
     @staticmethod
     def create_stacks(stacks):
-        # labels = stacks.pop()
-        # print(labels)
         column_char_width = 3
+        column_space_width = 1
         labels = [int(char) for char in stacks.pop() if char.isdigit()]
-        crate_data = {key: None for key in stacks}
-        print(labels)
-        print(stacks)
-        # 0 - 3
-        # 5-8
-        # 1*3 + 1*1
+        max_len = max([len(row) for row in stacks])
+        stacks = [row.ljust(max_len, " ") for row in stacks]
+        crate_data = {key: [] for key in labels}
+        # print(labels)
+        # print(stacks)
 
-        # 2*3 + 2*1
-        for label, i in enumerate(labels):
-            crate_data[label] = stacks[i : i + column_char_width].strip("[").strip("]")
+        for i, label in enumerate(labels):
+            index = i * column_char_width + i * column_space_width
+            # print(index)
+            for stack in stacks:
+                # print(len(stack), stack)
+                crate = stack[index + 1].strip()
+                if crate:
+                    crate_data[label].insert(0, crate)
 
+        print(crate_data)
         return Stacks(crate_data)
 
-    def organize_creates(self, moves):
-        pass
+    def organize_crates(self, moves):
+        # move 1 from 2 to 1
+        # m[0] count, m[1] from #, m[2] to #
+        for move in moves:
+            print(move)
+            m = [int(char) for char in move if char.isdigit()]
+            for i in range(0, m[0]):
+                crate = self.crate_data[m[1]].pop()
+                self.crate_data[m[2]].append(crate)
 
 
 class SupplyStacks:
@@ -48,7 +54,7 @@ class SupplyStacks:
         print(self.moves)
 
         stacks = Stacks.create_stacks(self.stacks)
-        stacks.organize_creates(self.moves)
+        stacks.organize_crates(self.moves)
 
     def sort_crates(self):
         pass
