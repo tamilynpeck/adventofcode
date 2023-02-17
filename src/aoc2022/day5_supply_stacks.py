@@ -1,11 +1,6 @@
 from common.FileReader import FileReader
 
 
-# class CrateNode:
-#     def __init__(self, row):
-#         self.row = row
-
-
 class Stacks:
     def __init__(self, crate_data):
         self.crate_data = crate_data
@@ -18,30 +13,27 @@ class Stacks:
         max_len = max([len(row) for row in stacks])
         stacks = [row.ljust(max_len, " ") for row in stacks]
         crate_data = {key: [] for key in labels}
-        # print(labels)
-        # print(stacks)
 
         for i, label in enumerate(labels):
             index = i * column_char_width + i * column_space_width
-            # print(index)
             for stack in stacks:
-                # print(len(stack), stack)
                 crate = stack[index + 1].strip()
                 if crate:
                     crate_data[label].insert(0, crate)
 
-        print(crate_data)
         return Stacks(crate_data)
 
     def organize_crates(self, moves):
-        # move 1 from 2 to 1
-        # m[0] count, m[1] from #, m[2] to #
         for move in moves:
-            print(move)
-            m = [int(char) for char in move if char.isdigit()]
-            for i in range(0, m[0]):
-                crate = self.crate_data[m[1]].pop()
-                self.crate_data[m[2]].append(crate)
+            count, from_stack, to_stack = [
+                int(chars) for chars in move.split(" ") if chars.isdigit()
+            ]
+            for _ in range(0, count):
+                crate = self.crate_data[from_stack].pop()
+                self.crate_data[to_stack].append(crate)
+
+    def top_crates(self):
+        return "".join([self.crate_data[key][-1] for key in self.crate_data])
 
 
 class SupplyStacks:
@@ -49,15 +41,10 @@ class SupplyStacks:
         data = file_reader.read_txt(file_name)
         self.stacks, self.moves = SupplyStacks.parse_data(data)
 
-    def part_one(self):
-        print(self.stacks)
-        print(self.moves)
-
+    def sort_crates(self):
         stacks = Stacks.create_stacks(self.stacks)
         stacks.organize_crates(self.moves)
-
-    def sort_crates(self):
-        pass
+        return stacks.top_crates()
 
     @staticmethod
     def parse_data(data):

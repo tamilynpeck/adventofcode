@@ -40,6 +40,6 @@ def test_part_one():
 
     supply_stacks = SupplyStacks(file_name=file_name, file_reader=file_reader)
 
-    result = supply_stacks.part_one()
+    result = supply_stacks.sort_crates()
 
     assert result == "CMZ"

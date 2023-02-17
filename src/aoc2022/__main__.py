@@ -1,16 +1,15 @@
 from aoc2022.day1_calorie_counting import calorie_counting
-from aoc2022.day2_rock_paper_scissors import rock_paper_scissors
 
-## DAY 1
+
 PUZZLE_INPUT_FILE = "202201.txt"
-
 result = calorie_counting(PUZZLE_INPUT_FILE)
 print("calorie_counting part 1", result)
 
 result = calorie_counting(PUZZLE_INPUT_FILE, top=3)
 print("calorie_counting part 2", result)
 
-## DAY 2
+from aoc2022.day2_rock_paper_scissors import rock_paper_scissors
+
 PUZZLE_INPUT_FILE = "202202.txt"
 result = rock_paper_scissors(PUZZLE_INPUT_FILE)
 print("rock_paper_scissors part 1", result)
@@ -33,3 +32,8 @@ print("camp_cleanup part 1", result)
 
 result = CampCleanup().find_overlapping()
 print("camp_cleanup part 2", result)
+
+from aoc2022.day5_supply_stacks import SupplyStacks
+
+result = SupplyStacks().sort_crates()
+print("supply_stacks part 1", result)

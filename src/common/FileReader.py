@@ -10,7 +10,8 @@ class FileReader:
         file_path = Path(self.base_path, file)
 
         with open(file_path) as input_file:
-            return input_file.readlines()
+            data = input_file.read()
+            return data.splitlines()
 
 
 class InMemoryFileReader:
