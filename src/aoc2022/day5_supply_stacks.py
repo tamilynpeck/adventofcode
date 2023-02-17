@@ -23,17 +23,33 @@ class Stacks:
 
         return Stacks(crate_data)
 
-    def organize_crates(self, moves):
+    def top_crates(self):
+        return "".join([self.crate_data[key][-1] for key in self.crate_data])
+
+
+class CrateMover9000:
+    @staticmethod
+    def organize_crates(stacks, moves):
         for move in moves:
             count, from_stack, to_stack = [
                 int(chars) for chars in move.split(" ") if chars.isdigit()
             ]
             for _ in range(0, count):
-                crate = self.crate_data[from_stack].pop()
-                self.crate_data[to_stack].append(crate)
+                crate = stacks[from_stack].pop()
+                stacks[to_stack].append(crate)
+        return Stacks(stacks)
 
-    def top_crates(self):
-        return "".join([self.crate_data[key][-1] for key in self.crate_data])
+
+class CrateMover9001:
+    @staticmethod
+    def organize_crates(stacks, moves):
+        for move in moves:
+            count, from_stack, to_stack = [
+                int(chars) for chars in move.split(" ") if chars.isdigit()
+            ]
+            crates = [stacks[from_stack].pop() for _ in range(0, count)]
+            stacks[to_stack].extend(crates[::-1])
+        return Stacks(stacks)
 
 
 class SupplyStacks:
@@ -41,10 +57,10 @@ class SupplyStacks:
         data = file_reader.read_txt(file_name)
         self.stacks, self.moves = SupplyStacks.parse_data(data)
 
-    def sort_crates(self):
+    def sort_crates(self, crate_mover=CrateMover9000):
         stacks = Stacks.create_stacks(self.stacks)
-        stacks.organize_crates(self.moves)
-        return stacks.top_crates()
+        organized_stacks = crate_mover.organize_crates(stacks.crate_data, self.moves)
+        return organized_stacks.top_crates()
 
     @staticmethod
     def parse_data(data):

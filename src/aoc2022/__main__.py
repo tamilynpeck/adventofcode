@@ -33,7 +33,10 @@ print("camp_cleanup part 1", result)
 result = CampCleanup().find_overlapping()
 print("camp_cleanup part 2", result)
 
-from aoc2022.day5_supply_stacks import SupplyStacks
+from aoc2022.day5_supply_stacks import SupplyStacks, CrateMover9000, CrateMover9001
 
-result = SupplyStacks().sort_crates()
+result = SupplyStacks().sort_crates(crate_mover=CrateMover9000)
 print("supply_stacks part 1", result)
+
+result = SupplyStacks().sort_crates(crate_mover=CrateMover9001)
+print("supply_stacks part 2", result)

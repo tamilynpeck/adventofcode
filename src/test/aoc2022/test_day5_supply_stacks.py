@@ -1,5 +1,5 @@
 from common.FileReader import InMemoryFileReader
-from aoc2022.day5_supply_stacks import SupplyStacks, Stacks
+from aoc2022.day5_supply_stacks import SupplyStacks, Stacks, CrateMover9000, CrateMover9001
 
 file_name = "202205.txt"
 test_data = """    [D]
@@ -27,12 +27,6 @@ def test_create_stacks():
         3: ["P"],
     }
 
-    # assert result.crate_data == {
-    #     1: ["N", "Z"],
-    #     2: ["D", "C", "M"],
-    #     3: ["P"],
-    # }
-
 
 def test_part_one():
     file_reader = InMemoryFileReader()
@@ -40,6 +34,17 @@ def test_part_one():
 
     supply_stacks = SupplyStacks(file_name=file_name, file_reader=file_reader)
 
-    result = supply_stacks.sort_crates()
+    result = supply_stacks.sort_crates(crate_mover=CrateMover9000)
 
     assert result == "CMZ"
+
+
+def test_part_two():
+    file_reader = InMemoryFileReader()
+    file_reader.setup(file_name, test_data)
+
+    supply_stacks = SupplyStacks(file_name=file_name, file_reader=file_reader)
+
+    result = supply_stacks.sort_crates(crate_mover=CrateMover9001)
+
+    assert result == "MCD"
