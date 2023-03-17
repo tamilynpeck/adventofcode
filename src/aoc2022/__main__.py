@@ -40,3 +40,11 @@ print("supply_stacks part 1", result)
 
 result = SupplyStacks().sort_crates(crate_mover=CrateMover9001)
 print("supply_stacks part 2", result)
+
+from aoc2022.day6_tuning_trouble import TuningTrouble
+
+result = TuningTrouble().solve_part_one()
+print("tuning_trouble part 1", result)
+
+result = TuningTrouble().solve_part_two()
+print("tuning_trouble part 2", result)
