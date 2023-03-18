@@ -48,3 +48,11 @@ print("tuning_trouble part 1", result)
 
 result = TuningTrouble().solve_part_two()
 print("tuning_trouble part 2", result)
+
+from aoc2022.day7_no_space_left_on_device import SpaceAnalyzer
+
+result = SpaceAnalyzer().solve_part_one()
+print("no_space_left_on_device part 1", result)
+
+result = SpaceAnalyzer().solve_part_two()
+print("no_space_left_on_device part 2", result)
