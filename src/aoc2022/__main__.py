@@ -56,3 +56,8 @@ print("no_space_left_on_device part 1", result)
 
 result = SpaceAnalyzer().solve_part_two()
 print("no_space_left_on_device part 2", result)
+
+from aoc2022.day8_treetop_tree_house import TreetopTreeHouse
+
+result = TreetopTreeHouse().visible_trees()
+print("treetop_tree_house part 1", result)
