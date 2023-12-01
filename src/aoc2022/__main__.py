@@ -61,3 +61,9 @@ from aoc2022.day8_treetop_tree_house import TreetopTreeHouse
 
 result = TreetopTreeHouse().visible_trees()
 print("treetop_tree_house part 1", result)
+
+
+from aoc2022.day9_rope_bridge import RopeBridge
+
+result = RopeBridge().solve_part_one()
+print("rope_bridge part 1", result)
