@@ -16,4 +16,4 @@ COPY ./src/test/conftest.py /conftest.py
 
 ENV WORKDIR=/test/input
 
-ENTRYPOINT [ "pytest","--cov-config", "/test/.coveragerc", "--cov", "-p", "no:cacheprovider", "/test/aoc2023" ]
+ENTRYPOINT [ "pytest","--cov-config", "/test/.coveragerc", "--cov", "-p", "no:cacheprovider", "/test/aoc2022" ]

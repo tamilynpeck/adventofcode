@@ -1,7 +1,6 @@
-from common.FileReader import InMemoryFileReader
+from common.FileReader import MemoryDataReader
 from aoc2022.day9_rope_bridge import RopeBridge
 
-file_name = "202209.txt"
 test_data = """R 4
 U 4
 L 3
@@ -13,10 +12,9 @@ R 2"""
 
 
 def test_part_one():
-    file_reader = InMemoryFileReader()
-    file_reader.setup(file_name, test_data)
+    reader = MemoryDataReader(test_data)
 
-    rope_bridge = RopeBridge(file_reader=file_reader)
-    result = rope_bridge.solve_part_one()
+    rope_bridge = RopeBridge(data=reader.data)
+    result = rope_bridge.simulate_motions()
 
     assert result == 13

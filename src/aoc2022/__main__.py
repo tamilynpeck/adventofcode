@@ -1,3 +1,4 @@
+from common.FileReader import DataReader
 from aoc2022.day1_calorie_counting import calorie_counting
 
 
@@ -65,5 +66,7 @@ print("treetop_tree_house part 1", result)
 
 from aoc2022.day9_rope_bridge import RopeBridge
 
-result = RopeBridge().solve_part_one()
+reader = DataReader(file_name="202209.txt")
+result = RopeBridge(data=reader.data).simulate_motions()
 print("rope_bridge part 1", result)
+# 5615 too low
