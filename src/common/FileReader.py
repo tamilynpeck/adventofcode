@@ -26,3 +26,18 @@ class InMemoryFileReader:
 
     def setup(self, file, data):
         self.files[file] = data
+
+
+class DataReader:
+    def __init__(self, file_name, file_reader=FileReader()):
+        self.file_reader = file_reader
+        self.file_name = file_name
+        self.data = self.file_reader.read_txt(self.file_name)
+
+
+class MemoryDataReader:
+    def __init__(self, data):
+        self.file_reader = InMemoryFileReader()
+        self.file_name = "memory"
+        self.file_reader.setup(self.file_name, data)
+        self.data = self.file_reader.read_txt(self.file_name)

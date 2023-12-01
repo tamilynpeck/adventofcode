@@ -11,8 +11,9 @@ WORKDIR /work/
 COPY ./src/test /test
 COPY ./src/common /common
 COPY ./src/aoc2022 /aoc2022
+COPY ./src/aoc2023 /aoc2023
 COPY ./src/test/conftest.py /conftest.py
 
 ENV WORKDIR=/test/input
 
-ENTRYPOINT [ "pytest","--cov-config", "/test/.coveragerc", "--cov", "-p", "no:cacheprovider", "/test" ]
+ENTRYPOINT [ "pytest","--cov-config", "/test/.coveragerc", "--cov", "-p", "no:cacheprovider", "/test/aoc2023" ]
