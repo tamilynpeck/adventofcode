@@ -31,9 +31,6 @@ class Trebuchet:
         interpret_data = [Trebuchet.interpret_line(line) for line in self.data]
         return sum([Trebuchet.calibration_value(line) for line in interpret_data])
 
-    def sum(self):
-        return sum([Trebuchet.calibration_value(line) for line in self.data])
-
     @staticmethod
     def calibration_value(line):
         numbers = [int(char) for char in line if char.isdigit()]
