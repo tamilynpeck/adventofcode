@@ -1,8 +1,8 @@
 FROM python:3.8-slim-buster
 
 RUN pip install --upgrade pip && \
-    pip install pytest && \
-    pip install pytest-cov
+  pip install pytest && \
+  pip install pytest-cov
 
 ENV PYTHONPATH "${PYTHONPATH}:/"
 
@@ -16,4 +16,4 @@ COPY ./src/test/conftest.py /conftest.py
 
 ENV WORKDIR=/test/input
 
-ENTRYPOINT [ "pytest","--cov-config", "/test/.coveragerc", "--cov", "-p", "no:cacheprovider", "/test/aoc2022" ]
+ENTRYPOINT [ "pytest","--cov-config", "/test/.coveragerc", "--cov", "-p", "no:cacheprovider", "/test" ]
