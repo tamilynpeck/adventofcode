@@ -4,55 +4,44 @@ class CubeConundrum:
         self.games = [CubeGame(game) for game in self.data]
 
     def possible_games(self, red, green, blue):
-        possible_games_id = []
-        for game in self.games:
-            if game.high_red <= red and game.high_green <= green and game.high_blue <= blue:
-                possible_games_id.append(game.game_id)
+        possible_games_id = [
+            game.game_id
+            for game in self.games
+            if game.max_red <= red and game.max_green <= green and game.max_blue <= blue
+        ]
+
         return sum(possible_games_id)
-    
+
     def power(self):
-        return sum([game.high_red * game.high_green * game.high_blue for game in self.games])
-    
+        return sum(
+            [game.max_red * game.max_green * game.max_blue for game in self.games]
+        )
 
-class CubeGame: 
+
+class CubeGame:
     def __init__(self, game):
-        number, turn_data = game.split(":")
-        self.game_id = int(number.split(" ")[1])
-        turn_data = turn_data.split(";")
-        turn_text = [turn.split(",") for turn in turn_data]
+        number, game_data = game.split(":")
+        self.game_id = int(number.replace("Game", "").strip())
 
-        self.turns = [TurnSet.parse_set(turn) for turn in turn_text]
+        cube_sets_data = [cube_set.split(",") for cube_set in game_data.split(";")]
+        self.cube_sets = [CubeSet(cube_set) for cube_set in cube_sets_data]
 
-        
-        self.high_red = max([turn.red for turn in self.turns])
-        self.high_green = max([turn.green for turn in self.turns])
-        self.high_blue = max([turn.blue for turn in self.turns])
-
-class TurnSet:
-    def __init__(self, turn_set):
-        self.red = 0
-        self.green = 0
-        self.blue = 0
-
-        for set in turn_set:
-            number, color = set
-            if color == "red":
-                self.red = int(number)
-            elif color == "green":
-                self.green = int(number)
-            elif color == "blue":
-                self.blue = int(number)
-            else:
-                raise ValueError(f"unknown color {color}")
+        self.max_red = max([cubes.red for cubes in self.cube_sets])
+        self.max_green = max([cubes.green for cubes in self.cube_sets])
+        self.max_blue = max([cubes.blue for cubes in self.cube_sets])
 
 
-    def parse_set(turn):
-        sets = [set.strip().split(" ") for set in turn]
+class CubeSet:
+    def __init__(self, cubes):
+        self.cubes = CubeSet.parse_cubes(cubes)
+        self.red = self.cubes.get("red", 0)
+        self.green = self.cubes.get("green", 0)
+        self.blue = self.cubes.get("blue", 0)
 
-        turn_set = TurnSet(sets)
-        
-
-        return turn_set
+    @staticmethod
+    def parse_cubes(cube_set):
+        parsed_set = [set.strip().split(" ") for set in cube_set]
+        return {color: int(number) for number, color in parsed_set}
 
     def __repr__(self) -> str:
         return f"red: {self.red}, green: {self.green}, blue: {self.blue}"
