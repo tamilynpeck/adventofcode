@@ -1,6 +1,7 @@
 from common.FileReader import DataReader
 from aoc2023.day1_trebuchet import Trebuchet
 from aoc2023.day2_cube_conundrum import CubeConundrum
+from aoc2023.day3_gear_ratios import GearRatios
 
 
 reader = DataReader(file_name="202301")
@@ -18,3 +19,11 @@ print("cube part 1", result)
 
 result = cube.power()
 print("cube part 2", result)
+
+reader = DataReader(file_name="202303.txt")
+gear = GearRatios(reader.data)
+result = gear.get_gear_part_total()
+print("gear part 1", result)
+
+result = gear.get_gear_ratios()
+print("gear part 2", result)
