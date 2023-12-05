@@ -3,6 +3,7 @@ from aoc2023.day1_trebuchet import Trebuchet
 from aoc2023.day2_cube_conundrum import CubeConundrum
 from aoc2023.day3_gear_ratios import GearRatios
 from aoc2023.day4_scratchcards import Scratchcards
+from aoc2023.day5 import Almanac
 
 
 reader = DataReader(file_name="202301.txt")
@@ -36,3 +37,12 @@ print("scratchcards part 1", result)
 
 result = scratchcards.get_total_scratchcards()
 print("scratchcards part 2", result)
+
+reader = DataReader(file_name="202305.txt")
+almanac = Almanac(reader.data)
+result = almanac.get_closest_location()
+print("almanac part 1", result)
+
+almanac = Almanac(reader.data)
+result = almanac.get_closest_location_by_seed_pair()
+print("almanac part 2", result)
