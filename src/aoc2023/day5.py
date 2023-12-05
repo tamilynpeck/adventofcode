@@ -1,29 +1,28 @@
+from functools import reduce
+
+
 class Almanac:
     def __init__(self, data):
         self.data = data
         self.parse_data()
 
-    def go_through_maps(self, seed_id):
-        new_id = seed_id
-        for map in self.maps:
-            print(new_id)
-            new_id = self.get_value_from_map(map, new_id)
-        return new_id
-
-    def reverse_go_through_maps(self, location_id):
-        new_id = location_id
-        for map in reversed(self.maps):
-            new_id = self.get_value_from_map_backwards(map, new_id)
-
-        return new_id
+        self.get_location = lambda id: reduce(self.seed_to_location, self.maps, id)
+        self.get_seed = lambda id: reduce(
+            self.location_to_seed, reversed(self.maps), id
+        )
 
     def get_closest_location(self):
-        locations = [self.go_through_maps(int(seed_id)) for seed_id in self.seed_ids]
-        print(locations)
+        locations = [self.get_location(int(seed_id)) for seed_id in self.seed_ids]
         return min(locations)
 
     def get_closest_location_by_seed_pair(self):
-        return self.get_location_backwards()
+        found_seed = False
+        location = 0
+        while not found_seed:
+            seed_id = self.get_seed(location)
+            if self.is_valid_seed(seed_id):
+                return location
+            location += 1
 
     def is_valid_seed(self, seed_id):
         for start, len in self.seed_pairs:
@@ -31,26 +30,17 @@ class Almanac:
                 return True
         return False
 
-    def get_location_backwards(self):
-        found_seed = False
-        location = 0
-        while not found_seed:
-            seed_id = self.reverse_go_through_maps(location)
-            if self.is_valid_seed(seed_id):
-                return location
-            location += 1
-
-    def get_value_from_map(self, map, x=0):
+    def seed_to_location(self, val, map):
         for range_dest, range_start, range_len in map:
-            if x in range(range_start, range_start + range_len):
-                return range_dest + (x - range_start)
-        return x
+            if val in range(range_start, range_start + range_len):
+                return range_dest + (val - range_start)
+        return val
 
-    def get_value_from_map_backwards(self, map, x=0):
+    def location_to_seed(self, val, map):
         for range_dest, range_start, range_len in map:
-            if x in range(range_dest, range_dest + range_len):
-                return range_start + (x - range_dest)
-        return x
+            if val in range(range_dest, range_dest + range_len):
+                return range_start + (val - range_dest)
+        return val
 
     def parse_data(self):
         seeds = self.data[0].replace("seeds:", "").strip().split(" ")
@@ -65,22 +55,14 @@ class Almanac:
         map_6 = self.data.index("temperature-to-humidity map:")
         map_7 = self.data.index("humidity-to-location map:")
 
-        self.seed_to_soil_map = self.parse_map(map_1, map_2)
-        self.soil_to_fertilizer_map = self.parse_map(map_2, map_3)
-        self.fertilizer_to_water_map = self.parse_map(map_3, map_4)
-        self.water_to_light_map = self.parse_map(map_4, map_5)
-        self.light_to_temperature_map = self.parse_map(map_5, map_6)
-        self.temperature_to_humidity_map = self.parse_map(map_6, map_7)
-        self.humidity_to_location_map = self.parse_map(map_7, len(self.data) + 1)
-
         self.maps = [
-            self.seed_to_soil_map,
-            self.soil_to_fertilizer_map,
-            self.fertilizer_to_water_map,
-            self.water_to_light_map,
-            self.light_to_temperature_map,
-            self.temperature_to_humidity_map,
-            self.humidity_to_location_map,
+            self.parse_map(map_1, map_2),
+            self.parse_map(map_2, map_3),
+            self.parse_map(map_3, map_4),
+            self.parse_map(map_4, map_5),
+            self.parse_map(map_5, map_6),
+            self.parse_map(map_6, map_7),
+            self.parse_map(map_7, len(self.data) + 1),
         ]
 
     def parse_map(self, start_i, end_i):
@@ -97,18 +79,3 @@ class Almanac:
             seed_pairs.append((x, next(it)))
 
         return seed_pairs
-
-
-class Seed:
-    def __init__(self, seed_id):
-        self.seed_id = int(seed_id)
-        self.soil = None
-        self.fertilizer = None
-        self.water = None
-        self.light = None
-        self.temperature = None
-        self.humidity = None
-        self.location = None
-
-    def __repr__(self):
-        return f"Seed({self.seed_id})"
