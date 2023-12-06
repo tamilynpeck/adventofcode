@@ -1,7 +1,4 @@
-from common.FileReader import FileReader
 from string import ascii_lowercase, ascii_uppercase
-
-# https://adventofcode.com/2022/day/3
 
 
 class Priority:
@@ -40,13 +37,12 @@ class RucksackGroup:
 class RunsackReorganization:
     def __init__(
         self,
-        file_name="202203.txt",
-        file_reader=FileReader(),
+        data,
         runsack=Rucksack,
         group=RucksackGroup,
         priority=Priority,
     ):
-        self.rucksacks = file_reader.read_txt(file_name)
+        self.rucksacks = data
         self.runsack = runsack
         self.group = group
         self.priority = priority

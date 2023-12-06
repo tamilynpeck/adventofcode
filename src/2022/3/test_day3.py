@@ -1,7 +1,7 @@
-from aoc2022.day3_rucksack_reorganization import RunsackReorganization
-from common.FileReader import InMemoryFileReader
+import pytest
+from utils import read_txt
+from day3 import RunsackReorganization
 
-file_name = "202203.txt"
 test_data = """vJrwpWtwJgWrhcsFMMfFFhFp
 jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL
 PmmdzqPrVvPwwTWBwg
@@ -10,12 +10,8 @@ ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw
 """
 
-file_reader = InMemoryFileReader()
-file_reader.setup(file_name, test_data)
-
-rucksack_reorganization = RunsackReorganization(
-    file_name=file_name, file_reader=file_reader
-)
+data = read_txt(test_data)
+rucksack_reorganization = RunsackReorganization(data)
 
 
 def test_part_one_shared_item_priority_sum():

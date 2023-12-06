@@ -1,11 +1,6 @@
-from common.FileReader import FileReader
-
-
 class SpaceAnalyzer:
-    def __init__(self, file_name="202207.txt", file_reader=FileReader()):
-        self.file_name = file_name
-        self.file_reader = file_reader
-        self.commands = self.file_reader.read_txt(self.file_name)
+    def __init__(self, data):
+        self.commands = data
         self.directories = self.group_directories()
         self.max_size = 70000000
         self.min_unused_size_needed = 30000000

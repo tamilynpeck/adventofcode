@@ -1,8 +1,8 @@
 import pytest
-from common.FileReader import InMemoryFileReader
-from aoc2022.day6_tuning_trouble import TuningTrouble
+from utils import read_txt
+from day6 import TuningTrouble
 
-test_name = "202206.txt"
+test_data = ""
 
 
 @pytest.mark.parametrize(
@@ -16,10 +16,9 @@ test_name = "202206.txt"
     ],
 )
 def test_part_one(test_data, expected_result):
-    file_reader = InMemoryFileReader()
-    file_reader.setup(test_name, test_data)
+    data = read_txt(test_data)
 
-    tuning_trouble = TuningTrouble(file_name=test_name, file_reader=file_reader)
+    tuning_trouble = TuningTrouble(data)
 
     result = tuning_trouble.solve_part_one()
 
@@ -37,10 +36,9 @@ def test_part_one(test_data, expected_result):
     ],
 )
 def test_part_two(test_data, expected_result):
-    file_reader = InMemoryFileReader()
-    file_reader.setup(test_name, test_data)
+    data = read_txt(test_data)
 
-    tuning_trouble = TuningTrouble(file_name=test_name, file_reader=file_reader)
+    tuning_trouble = TuningTrouble(data)
 
     result = tuning_trouble.solve_part_two()
 

@@ -81,5 +81,4 @@ class Board:
             self.track_tail_positions.append(self.tail_position)
 
     def count_visits(self):
-
         return len(self.track_tail_positions)

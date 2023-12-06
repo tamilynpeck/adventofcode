@@ -1,6 +1,3 @@
-from common.FileReader import FileReader
-
-
 class Assignment:
     def __init__(self, range):
         self.range = range
@@ -27,9 +24,9 @@ class Pair:
         self.second = second
 
     def is_overlapping(self):
-        return self.first.contains_section(
-            self.second
-        ) or self.second.contains_section(self.first)
+        return self.first.contains_section(self.second) or self.second.contains_section(
+            self.first
+        )
 
     def is_fully_overlapping(self):
         return self.first.contains_assignment(
@@ -38,8 +35,7 @@ class Pair:
 
 
 class CampCleanup:
-    def __init__(self, file_name="202204.txt", file_reader=FileReader()):
-        data = file_reader.read_txt(file_name)
+    def __init__(self, data):
         self.assignments = CampCleanup.parse_data(data)
 
     def find_fully_overlapping(self):

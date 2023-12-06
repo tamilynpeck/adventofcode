@@ -1,6 +1,3 @@
-from common.FileReader import FileReader
-
-
 class Stacks:
     def __init__(self, crate_data):
         self.crate_data = crate_data
@@ -53,8 +50,7 @@ class CrateMover9001:
 
 
 class SupplyStacks:
-    def __init__(self, file_name="202205.txt", file_reader=FileReader()):
-        data = file_reader.read_txt(file_name)
+    def __init__(self, data):
         self.stacks, self.moves = SupplyStacks.parse_data(data)
 
     def sort_crates(self, crate_mover=CrateMover9000):

@@ -1,6 +1,3 @@
-from common.FileReader import FileReader
-
-
 class GameManager:
     winner_of_action = {"Rock": "Paper", "Scissors": "Rock", "Paper": "Scissors"}
     loser_of_action = {v: k for k, v in winner_of_action.items()}
@@ -106,11 +103,9 @@ class ResultsGuideEngine:
 
 
 def rock_paper_scissors(
-    input_file,
+    data,
     guide_type="actions",
-    file_reader=FileReader(),
 ):
-    data = file_reader.read_txt(input_file)
     guide = [[line[0], line[2]] for line in data]
 
     guide_engine = get_guide_engine(guide_type)(guide)

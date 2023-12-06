@@ -34,10 +34,10 @@ from day{day} import Day{day}
 data = read_file("input.txt")
 
 program = Day{day}(data)
-result = program.part1()
+result = program.solve_part_one()
 print("part 1", result)
 
-result = program.part2()
+result = program.solve_part_two()
 print("part 2", result)"""
 create_file(program_path, program_data)
 
@@ -47,10 +47,10 @@ data = f"""class Day{day}:
     def __init__(self, data):
         self.data = data
 
-    def part1(self):
+    def solve_part_one(self):
         pass
 
-    def part2(self):
+    def solve_part_two(self):
         pass"""
 create_file(day_path, data)
 
@@ -66,7 +66,7 @@ def test_day{day}():
     data = read_txt(test_data)
     program = Day{day}(data)
 
-    result = program.part1()
+    result = program.solve_part_one()
 
     assert result == 0
 
@@ -80,7 +80,7 @@ def test_program_function(line, expected):
     data = read_txt(line)
     program = Day{day}(data)
 
-    result = program.power()
+    result = program.test()
 
     assert result == expected
 """

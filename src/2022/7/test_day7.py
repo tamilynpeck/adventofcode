@@ -1,7 +1,7 @@
-from common.FileReader import InMemoryFileReader
-from aoc2022.day7_no_space_left_on_device import SpaceAnalyzer
+import pytest
+from utils import read_txt
+from day7 import SpaceAnalyzer
 
-file_name = "202207.txt"
 test_data = """$ cd /
 $ ls
 dir a
@@ -28,9 +28,8 @@ $ ls
 
 
 def test_part_one_group_directories():
-    file_reader = InMemoryFileReader()
-    file_reader.setup(file_name, test_data)
-    space_analyzer = SpaceAnalyzer(file_name=file_name, file_reader=file_reader)
+    data = read_txt(test_data)
+    space_analyzer = SpaceAnalyzer(data)
 
     directories = space_analyzer.group_directories()
 
@@ -41,18 +40,17 @@ def test_part_one_group_directories():
 
 
 def test_part_one_solution():
-    file_reader = InMemoryFileReader()
-    file_reader.setup(file_name, test_data)
-    space_analyzer = SpaceAnalyzer(file_name=file_name, file_reader=file_reader)
+    data = read_txt(test_data)
+    space_analyzer = SpaceAnalyzer(data)
 
     result = space_analyzer.solve_part_one()
 
     assert result == 95437
 
+
 def test_part_two_solution():
-    file_reader = InMemoryFileReader()
-    file_reader.setup(file_name, test_data)
-    space_analyzer = SpaceAnalyzer(file_name=file_name, file_reader=file_reader)
+    data = read_txt(test_data)
+    space_analyzer = SpaceAnalyzer(data)
 
     result = space_analyzer.solve_part_two()
 

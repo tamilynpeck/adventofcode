@@ -1,4 +1,3 @@
-from common.FileReader import DataReader
 from aoc2022.day1_calorie_counting import calorie_counting
 
 
@@ -8,65 +7,3 @@ print("calorie_counting part 1", result)
 
 result = calorie_counting(PUZZLE_INPUT_FILE, top=3)
 print("calorie_counting part 2", result)
-
-from aoc2022.day2_rock_paper_scissors import rock_paper_scissors
-
-PUZZLE_INPUT_FILE = "202202.txt"
-result = rock_paper_scissors(PUZZLE_INPUT_FILE)
-print("rock_paper_scissors part 1", result)
-
-result = rock_paper_scissors(PUZZLE_INPUT_FILE, guide_type="results")
-print("rock_paper_scissors part 2", result)
-
-from aoc2022.day3_rucksack_reorganization import RunsackReorganization
-
-result = RunsackReorganization().duplicate_item_priority_sum()
-print("rucksack_reorganization part 1", result)
-
-result = RunsackReorganization().group_badge_item_priority_sum()
-print("rucksack_reorganization part 2", result)
-
-from aoc2022.day4_camp_cleanup import CampCleanup
-
-result = CampCleanup().find_fully_overlapping()
-print("camp_cleanup part 1", result)
-
-result = CampCleanup().find_overlapping()
-print("camp_cleanup part 2", result)
-
-from aoc2022.day5_supply_stacks import SupplyStacks, CrateMover9000, CrateMover9001
-
-result = SupplyStacks().sort_crates(crate_mover=CrateMover9000)
-print("supply_stacks part 1", result)
-
-result = SupplyStacks().sort_crates(crate_mover=CrateMover9001)
-print("supply_stacks part 2", result)
-
-from aoc2022.day6_tuning_trouble import TuningTrouble
-
-result = TuningTrouble().solve_part_one()
-print("tuning_trouble part 1", result)
-
-result = TuningTrouble().solve_part_two()
-print("tuning_trouble part 2", result)
-
-from aoc2022.day7_no_space_left_on_device import SpaceAnalyzer
-
-result = SpaceAnalyzer().solve_part_one()
-print("no_space_left_on_device part 1", result)
-
-result = SpaceAnalyzer().solve_part_two()
-print("no_space_left_on_device part 2", result)
-
-from aoc2022.day8_treetop_tree_house import TreetopTreeHouse
-
-result = TreetopTreeHouse().visible_trees()
-print("treetop_tree_house part 1", result)
-
-
-from aoc2022.day9_rope_bridge import RopeBridge
-
-reader = DataReader(file_name="202209.txt")
-result = RopeBridge(data=reader.data).simulate_motions()
-print("rope_bridge part 1", result)
-# 5615 too low

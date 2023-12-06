@@ -1,6 +1,3 @@
-from common.FileReader import FileReader
-
-
 class Tree:
     def __init__(self, height, x, y, row, column):
         self.x = x
@@ -39,10 +36,8 @@ class Tree:
 
 
 class TreetopTreeHouse:
-    def __init__(self, file_name="202208.txt", file_reader=FileReader()):
-        self.file_reader = file_reader
-        self.file_name = file_name
-        self.data = self.file_reader.read_txt(self.file_name)
+    def __init__(self, data):
+        self.data = data
         self.trees = [[char for char in row] for row in self.data]
 
     def visible_trees(self):
