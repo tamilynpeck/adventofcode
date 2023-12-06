@@ -1,6 +1,6 @@
 import pytest
-from common.FileReader import MemoryDataReader
-from aoc2023.day5 import Almanac
+from utils import read_txt
+from day5 import Almanac
 
 test_data = """seeds: 79 14 55 13
 
@@ -38,8 +38,8 @@ humidity-to-location map:
 
 
 def test_almanac():
-    reader = MemoryDataReader(test_data)
-    almanac = Almanac(reader.data)
+    data = read_txt(test_data)
+    almanac = Almanac(data)
 
     result = almanac.get_closest_location()
 
@@ -47,8 +47,8 @@ def test_almanac():
 
 
 def test_almanac_part2():
-    reader = MemoryDataReader(test_data)
-    almanac = Almanac(reader.data)
+    data = read_txt(test_data)
+    almanac = Almanac(data)
 
     result = almanac.get_closest_location_by_seed_pair()
 

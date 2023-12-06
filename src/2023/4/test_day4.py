@@ -1,6 +1,6 @@
 import pytest
-from common.FileReader import MemoryDataReader
-from aoc2023.day4_scratchcards import Scratchcards
+from utils import read_txt
+from day4 import Scratchcards
 
 test_data = """Card   1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
 Card   2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
@@ -11,8 +11,8 @@ Card   6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11"""
 
 
 def test_scratchcards():
-    reader = MemoryDataReader(test_data)
-    scratchcards = Scratchcards(reader.data)
+    data = read_txt(test_data)
+    scratchcards = Scratchcards(data)
 
     result = scratchcards.get_card_total()
 
@@ -20,8 +20,8 @@ def test_scratchcards():
 
 
 def test_total_cards():
-    reader = MemoryDataReader(test_data)
-    scratchcards = Scratchcards(reader.data)
+    data = read_txt(test_data)
+    scratchcards = Scratchcards(data)
 
     result = scratchcards.get_total_scratchcards()
 

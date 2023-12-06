@@ -1,6 +1,6 @@
 import pytest
-from common.FileReader import MemoryDataReader
-from aoc2023.day3_gear_ratios import GearRatios
+from utils import read_txt
+from day3 import GearRatios
 
 
 def test_gear_ratios():
@@ -15,8 +15,8 @@ def test_gear_ratios():
 ...$.*....
 .664.598.."""
 
-    reader = MemoryDataReader(test_data)
-    gear = GearRatios(reader.data)
+    data = read_txt(test_data)
+    gear = GearRatios(data)
 
     result = gear.get_gear_part_total()
 
@@ -35,8 +35,8 @@ def test_gear_ratios_2():
 ...$.*....
 .664.598.."""
 
-    reader = MemoryDataReader(test_data)
-    gear = GearRatios(reader.data)
+    data = read_txt(test_data)
+    gear = GearRatios(data)
 
     result = gear.get_gear_part_total()
 
@@ -45,8 +45,8 @@ def test_gear_ratios_2():
 
 def test_searching():
     test_data = """467..114.."""
-    reader = MemoryDataReader(test_data)
-    gear = GearRatios(reader.data)
+    data = read_txt(test_data)
+    gear = GearRatios(data)
 
     result = gear.search_for_symbol(0, 1)
 
@@ -65,8 +65,8 @@ def test_gear_ratios():
 ...$.*....
 .664.598.."""
 
-    reader = MemoryDataReader(test_data)
-    gear = GearRatios(reader.data)
+    data = read_txt(test_data)
+    gear = GearRatios(data)
 
     result = gear.get_gear_ratios()
 
@@ -85,8 +85,8 @@ def test_gear_ratios_multiple_on_one_row():
 ...$.*....
 .664......"""
 
-    reader = MemoryDataReader(test_data)
-    gear = GearRatios(reader.data)
+    data = read_txt(test_data)
+    gear = GearRatios(data)
 
     result = gear.get_gear_ratios()
 

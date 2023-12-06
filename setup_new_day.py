@@ -1,5 +1,6 @@
 import os
 import sys
+import shutil
 from datetime import date
 from pathlib import Path
 
@@ -18,21 +19,72 @@ base_path.mkdir(exist_ok=True, parents=True)
 
 def create_file(path, data=""):
     if not path.exists():
+        print(f"Creating file: {path}")
         with open(path, "w") as f:
             f.write(data)
 
 
-path = Path(base_path, "input.txt")
-create_file(path)
+input_path = Path(base_path, "input.txt")
+create_file(input_path)
 
-path = Path(base_path, f"day{day}.py")
-data = f"""from aoc.utils import read_file"""
-create_file(path, data)
+program_path = Path(base_path, "program.py")
+program_data = f"""from utils import read_file
+from day{day} import Day{day}
 
-# copy import file?
+data = read_file("input.txt")
 
-path = Path(base_path, f"test_day{day}.py")
-data = f"""from aoc.utils import read_file
-from day{day} import class_name
+program = Day{day}(data)
+result = program.part1()
+print("part 1", result)
+
+result = program.part2()
+print("part 2", result)"""
+create_file(program_path, program_data)
+
+
+day_path = Path(base_path, f"day{day}.py")
+data = f"""class Day{day}:
+    def __init__(self, data):
+        self.data = data
+
+    def part1(self):
+        pass
+
+    def part2(self):
+        pass"""
+create_file(day_path, data)
+
+
+test_path = Path(base_path, f"test_day{day}.py")
+test_data = f"""import pytest
+from utils import read_txt
+from day{day} import Day{day}
+
+test_data = ""
+
+def test_day{day}():
+    data = read_txt(test_data)
+    program = Day{day}(data)
+
+    result = program.part1()
+
+    assert result == 0
+
+@pytest.mark.parametrize(
+    "line,expected",
+    [
+        ("line", "expected"),
+    ],
+)
+def test_program_function(line, expected):
+    data = read_txt(line)
+    program = Day{day}(data)
+
+    result = program.power()
+
+    assert result == expected
 """
-create_file(path, data)
+create_file(test_path, test_data)
+
+util_path = Path(base_path, f"utils.py")
+shutil.copyfile("src/common/utils.py", util_path)

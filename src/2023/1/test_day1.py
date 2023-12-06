@@ -1,6 +1,6 @@
 import pytest
-from common.FileReader import MemoryDataReader
-from aoc2023.day1_trebuchet import Trebuchet
+from day1 import Trebuchet
+from utils import read_txt
 
 
 def test_trebuchet_calibration():
@@ -8,9 +8,9 @@ def test_trebuchet_calibration():
     pqr3stu8vwx
     a1b2c3d4e5f
     treb7uchet"""
-    reader = MemoryDataReader(test_data)
+    data = read_txt(test_data)
 
-    trebuchet = Trebuchet(data=reader.data)
+    trebuchet = Trebuchet(data)
     result = trebuchet.calibrate_sum()
 
     assert result == 142
@@ -57,9 +57,9 @@ xtwone3four
 4nineeightseven2
 zoneight234
 7pqrstsixteen"""
-    reader = MemoryDataReader(test_data)
+    data = read_txt(test_data)
 
-    trebuchet = Trebuchet(data=reader.data)
+    trebuchet = Trebuchet(data)
     result = trebuchet.calibrate_sum_after_interpreting_data()
 
     assert result == 281

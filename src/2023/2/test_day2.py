@@ -1,6 +1,6 @@
 import pytest
-from common.FileReader import MemoryDataReader
-from aoc2023.day2_cube_conundrum import CubeConundrum
+from utils import read_txt
+from day2 import CubeConundrum
 
 test_data = """Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
@@ -10,8 +10,8 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"""
 
 
 def test_cube_conundrum():
-    reader = MemoryDataReader(test_data)
-    cube = CubeConundrum(reader.data)
+    data = read_txt(test_data)
+    cube = CubeConundrum(data)
 
     result = cube.possible_games(red=12, green=13, blue=14)
 
@@ -35,8 +35,8 @@ def test_cube_conundrum():
     ],
 )
 def test_cube_conundrum_power(line, expected):
-    reader = MemoryDataReader(line)
-    cube = CubeConundrum(reader.data)
+    data = read_txt(line)
+    cube = CubeConundrum(data)
 
     result = cube.power()
 
@@ -44,8 +44,8 @@ def test_cube_conundrum_power(line, expected):
 
 
 def test_cube_conundrum_power_total():
-    reader = MemoryDataReader(test_data)
-    cube = CubeConundrum(reader.data)
+    data = read_txt(test_data)
+    cube = CubeConundrum(data)
 
     result = cube.power()
 
