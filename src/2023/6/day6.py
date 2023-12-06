@@ -7,22 +7,15 @@ class Day6:
         self.record_distance = data[1].split(":")[1].strip()
 
     def solve_part_one(self):
-        time = (
-            self.time.replace("   ", " ")
-            .replace("  ", " ")
-            .replace("  ", " ")
-            .split(" ")
-        )
-        record_distance = (
-            self.record_distance.replace("   ", " ").replace("  ", " ").split(" ")
-        )
+        time = " ".join(self.time.split()).split(" ")
+        record_distance = " ".join(self.record_distance.split()).split(" ")
 
         return self.calculate_options(time, record_distance)
 
     def solve_part_two(self):
-        time = self.time.replace(" ", "").split(" ")
-        record_distance = self.record_distance.replace(" ", "").split(" ")
-        return self.calculate_options(time, record_distance)
+        time = "".join(self.time.split())
+        record_distance = "".join(self.record_distance.split())
+        return self.calculate_options([time], [record_distance])
 
     def calculate_options(self, time, record_distance):
         count_options = []
