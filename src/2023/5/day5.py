@@ -47,29 +47,18 @@ class Almanac:
         self.seed_ids = [int(x) for x in seeds]
         self.seed_pairs = self.get_pairs(seeds)
 
-        map_1 = self.data.index("seed-to-soil map:")
-        map_2 = self.data.index("soil-to-fertilizer map:")
-        map_3 = self.data.index("fertilizer-to-water map:")
-        map_4 = self.data.index("water-to-light map:")
-        map_5 = self.data.index("light-to-temperature map:")
-        map_6 = self.data.index("temperature-to-humidity map:")
-        map_7 = self.data.index("humidity-to-location map:")
-
-        self.maps = [
-            self.parse_map(map_1, map_2),
-            self.parse_map(map_2, map_3),
-            self.parse_map(map_3, map_4),
-            self.parse_map(map_4, map_5),
-            self.parse_map(map_5, map_6),
-            self.parse_map(map_6, map_7),
-            self.parse_map(map_7, len(self.data) + 1),
-        ]
-
-    def parse_map(self, start_i, end_i):
-        return [
-            [int(value) for value in line.strip().split(" ")]
-            for line in self.data[start_i + 1 : end_i - 1]
-        ]
+        self.maps = []
+        temp = []
+        for line in self.data[1:]:
+            if line and "map:" in line:
+                temp = []
+            elif line:
+                temp.append(line)
+            elif temp:
+                test = [
+                    [int(value) for value in line.strip().split(" ")] for line in temp
+                ]
+                self.maps.append(test)
 
     def get_pairs(self, seeds):
         seeds = [int(x) for x in seeds]
