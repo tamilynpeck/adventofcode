@@ -32,10 +32,6 @@ def test_day7_part_two():
     [
         ("33333", False, 4),
         ("J3333", True, 4),
-        # ("J3332", True, False),
-        # ("J3332", False, False),
-        # ("J2332", True, False),
-        # ("J2332", False, False),
         ("JJJJJ", True, 4),
         ("JJJJJ", False, 4),
     ],
@@ -50,10 +46,7 @@ def test_five_of_a_kind(hand, wild, expected):
     "hand,wild,expected",
     [
         ("33332", False, 2),
-        # ("33333", False, False),
-        # ("32233", False, False),
-        # ("J3332", False, False),
-        # ("3KTJJ", True, False),
+        ("J3333", False, 2),
         ("J3332", True, 2),
         ("332JJ", True, 2),
     ],
@@ -68,12 +61,9 @@ def test_four_of_a_kind(hand, wild, expected):
     "hand,wild,expected",
     [
         ("23332", False, 1),
-        # ("32T3K", False, False),
-        # ("22222", False, False),
-        # ("J2222", True, False),
+        ("32233", False, 1),
         ("2J332", True, 1),
         ("J3322", True, 1),
-        # ("32T3J", True, False),
     ],
 )
 def test_full_house(hand, wild, expected):
@@ -86,8 +76,6 @@ def test_full_house(hand, wild, expected):
     "hand,wild,expected",
     [
         ("QQQJA", False, 0),
-        # ("32T3K", False, False),
-        # ("23332", False, False),
         ("32T3J", True, 0),
         ("33T4J", True, 0),
     ],
@@ -102,11 +90,6 @@ def test_three_of_a_kind(hand, wild, expected):
     "hand,wild,expected",
     [
         ("23432", False, -1),
-        # ("32T3K", False, False),
-        # ("23332", False, False),
-        # ("3KT4J", True, False),
-        # ("33T4J", True, False),
-        # ("3KTJJ", True, False),
     ],
 )
 def test_two_pair(hand, wild, expected):
@@ -119,13 +102,9 @@ def test_two_pair(hand, wild, expected):
     "hand,wild,expected",
     [
         ("2K432", False, -2),
-        # ("32T9K", False, False),
-        # ("23332", False, False),
-        # ("23432", False, False),
         ("3KT4J", True, -2),
         ("3KT99", True, -2),
         ("J37QA", True, -2),
-        # ("J37QA", False, False),
     ],
 )
 def test_one_pair(hand, wild, expected):
