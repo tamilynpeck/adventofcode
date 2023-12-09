@@ -55,18 +55,3 @@ XXX = (XXX, XXX)"""
     result = program.solve_part_two()
 
     assert result == 6
-
-
-# @pytest.mark.parametrize(
-#     "line,expected",
-#     [
-#         ("line", "expected"),
-#     ],
-# )
-# def test_program_function(line, expected):
-#     data = read_txt(line)
-#     program = Day8(data)
-
-#     result = program.test()
-
-#     assert result == expected

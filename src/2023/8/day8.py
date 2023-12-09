@@ -1,55 +1,41 @@
+from math import lcm
+
+
 class Day8:
     def __init__(self, data):
         self.data = data
         self.directions = data[0]
         self.instructions = data[2:]
         self.map = parse_instructions(self.instructions)
-        self.location = "AAA"
-        self.steps = 0
 
     def solve_part_one(self):
-        looking = True
-        while looking:
-            for direction in self.directions:
-                # print(self.location, direction)
-                if direction == "R":
-                    self.location = self.map[self.location][1]
-                elif direction == "L":
-                    self.location = self.map[self.location][0]
-
-                self.steps += 1
-                if self.location == "ZZZ":
-                    looking = False
-
-        return self.steps
+        start_location = "AAA"
+        steps = self.get_steps_to_dest(start_location, dest=lambda x: x == "ZZZ")
+        return steps
 
     def solve_part_two(self):
-        self.locations = [
-            location for location in self.map.keys() if location.endswith("A")
-        ]
-        print(self.locations)
+        start_locations = [l for l in self.map.keys() if l.endswith("A")]
+        steps_to_dests = []
 
+        for location in start_locations:
+            steps = self.get_steps_to_dest(location, dest=lambda x: x.endswith("Z"))
+            steps_to_dests.append(steps)
+
+        return lcm(*steps_to_dests)
+
+    def get_steps_to_dest(self, start_location, dest):
+        location = start_location
+        steps = 0
         looking = True
-        # i = 0
         while looking:
             for direction in self.directions:
-                if direction == "R":
-                    self.locations = [
-                        self.map[location][1] for location in self.locations
-                    ]
-                elif direction == "L":
-                    self.locations = [
-                        self.map[location][0] for location in self.locations
-                    ]
-
-                self.steps += 1
-                if all([location.endswith("Z") for location in self.locations]):
+                location = self.map[location][direction]
+                steps += 1
+                if dest(location):
                     looking = False
-            # i += 1
-            # if i > 100:
-            #     break
+                    break
 
-        return self.steps
+        return steps
 
 
 def parse_instructions(instructions):
@@ -59,6 +45,7 @@ def parse_instructions(instructions):
         key = key.strip()
         dirs = dirs.strip().replace("(", "").replace(")", "").split(",")
         dirs = [dir.strip() for dir in dirs]
+        dirs = {"L": dirs[0], "R": dirs[1]}
         map[key] = dirs
 
     return map
