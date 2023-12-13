@@ -80,7 +80,7 @@ def test_program_function(line, expected):
     data = read_txt(line)
     program = Day{day}(data)
 
-    result = program.test()
+    result = program.test(line)
 
     assert result == expected
 """
