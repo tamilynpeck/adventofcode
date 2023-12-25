@@ -1,5 +1,7 @@
 import networkx as nx
 
+# https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.flow.minimum_cut.html#networkx.algorithms.flow.minimum_cut
+
 
 class Day25:
     def __init__(self, data):
