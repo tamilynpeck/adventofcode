@@ -5,70 +5,64 @@ offsets = {
     "R": (0, 1),  # right
 }
 
+hex_directions = {
+    "3": "U",  # up
+    "1": "D",  # down
+    "2": "L",  # left
+    "0": "R",  # right
+}
+
 
 class Day18:
     def __init__(self, data):
         self.data = data
-        self.map = [["#"]]
 
     def solve_part_one(self):
-        r, c = 0, 0
+        instructions = []
         for line in self.data:
             direction, steps, _ = line.split(" ")
-            print(direction, steps)
-            for _ in range(int(steps)):
-                if direction == "R":
-                    c += 1
-                elif direction == "L":
-                    c -= 1
-                elif direction == "U":
-                    r -= 1
-                elif direction == "D":
-                    r += 1
-                # print(step, r, c)
-                if r >= len(self.map):
-                    self.map.append(["." for _ in range(len(self.map[0]))])
-                if c >= len(self.map[r]):
-                    diff = c - len(self.map[r]) + 1
-                    self.map[r].extend(["." for _ in range(diff)])
-                if r == -1:
-                    self.shift_map_up()
-                    r = 0
-                if c == -1:
-                    self.shift_map_left()
-                    c = 0
+            steps = int(steps)
+            instructions.append((direction, steps))
 
-                self.map[r][c] = "#"
+        return self.solve_for_points(instructions)
 
-        self.print_data_map()
+    def solve_for_points(self, instructions):
+        r, c = 0, 0
+        self.map = [(r, c)]
+        self.map = []
+        boundary_points = 0
+        # print(": (", r, ",", c, ")")
+        for direction, steps in instructions:
+            boundary_points += steps
+            r, c = r + offsets[direction][0] * steps, c + offsets[direction][1] * steps
+            # print(direction, steps, ": (", r, ",", c, ")")
+            self.map.append((r, c))
 
-        for line in self.map:
-            # print(line)
-            indexes = [i for i, x in enumerate(line) if x == "#"]
-            start_index = line.index("#")
-            end_index = len(line) - 1 - line[::-1].index("#")
-            fill_range = range(start_index, end_index + 1)
-            # print(start_index, end_index)
-            for i, _ in enumerate(line):
-                if i in fill_range:
-                    line[i] = "#"
+        shoelace_area = shoelace(self.map)
 
-        print("After filling:")
-        self.print_data_map()
-
-        return sum([row.count("#") for row in self.map])
-
-    def shift_map_left(self):
-        for row in self.map:
-            row.insert(0, ".")
-
-    def shift_map_up(self):
-        self.map.insert(0, ["." for _ in range(len(self.map[0]))])
-
-    def print_data_map(self):
-        for row in self.map:
-            # print(row)
-            print(" ".join(row))
+        # pick's theorem
+        return int(shoelace_area + 1 + boundary_points / 2)
 
     def solve_part_two(self):
-        pass
+        instructions = []
+        for line in self.data:
+            _, hex = line.split("#")
+            steps = int(hex[:5], 16)
+            direction = hex_directions[hex[5]]
+            steps = int(steps)
+            instructions.append((direction, steps))
+
+        return self.solve_for_points(instructions)
+
+
+# shoelace formula
+def shoelace(points):
+    area = 0
+
+    X = [point[0] for point in points] + [points[0][0]]
+    Y = [point[1] for point in points] + [points[0][1]]
+
+    for i in range(len(points)):
+        area += X[i] * Y[i + 1] - Y[i] * X[i + 1]
+
+    return abs(area) / 2

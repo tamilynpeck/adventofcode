@@ -27,34 +27,10 @@ def test_day18():
     assert result == 62
 
 
-def test_day18_start_left():
-    test_data = """L 6 (#70c710)
-D 5 (#0dc571)
-L 2 (#5713f0)
-U 2 (#d2c081)
-L 2 (#5713f0)
-U 3 (#a77fa3)
-L 2 (#5713f0)
-U 3 (#a77fa3)"""
-
+def test_day18_part_two():
     data = read_txt(test_data)
     program = Day18(data)
 
-    result = program.solve_part_one()
+    result = program.solve_part_two()
 
-    assert result == 62
-
-
-# @pytest.mark.parametrize(
-#     "line,expected",
-#     [
-#         ("line", "expected"),
-#     ],
-# )
-# def test_program_function(line, expected):
-#     data = read_txt(line)
-#     program = Day18(data)
-
-#     result = program.test(line)
-
-#     assert result == expected
+    assert result == 952408144115

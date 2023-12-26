@@ -30,6 +30,15 @@ def test_day19():
     assert result == 19114
 
 
+def test_day19_part_two():
+    data = read_txt(test_data)
+    program = Day19(data)
+
+    result = program.solve_part_two()
+
+    assert result == 167409079868000
+
+
 # @pytest.mark.parametrize(
 #     "line,expected",
 #     [
