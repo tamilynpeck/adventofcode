@@ -4,81 +4,61 @@ from collections import Counter
 class Day13:
     def __init__(self, data):
         self.data = data
-        # print(data)
         self.patterns = []
 
     def solve_part_one(self):
         self.parse_data()
         print(self.patterns)
-        odd_scores = 0
-        even_scores = 0
+        scores = 0
 
-        for i, pattern in enumerate(self.patterns):
-            if i % 2 == 0:
-                print("score_even_pattern")
-                even_scores += self.score_even_pattern(pattern)
-            else:
-                print("score_odd_pattern")
-                # odd_scores += self.score_odd_pattern(pattern)
+        for _, pattern in enumerate(self.patterns):
+            vertical_match = self.score_vertical_pattern(pattern)
+            if vertical_match:
+                print("vertical_match", vertical_match)
+                scores += vertical_match
+            horizontal_match = self.score_horizontal_pattern(pattern)
+            if horizontal_match:
+                print("horizontal_match", horizontal_match)
+                scores += horizontal_match * 100
+
+        return scores
 
     def solve_part_two(self):
         pass
 
-    def score_even_pattern(self, pattern):
-        # find vertical reflection
-        matches = []
-        for c, line in enumerate(pattern):
-            row = [l for l in line]
-            print(c, row)
-            for i in range(len(row)):
-                test_column = row[:i]
-                test_mirror_column = row[i:]
-                min_len = min(len(test_column), len(test_mirror_column))
-                print(i, min_len, test_column[:min_len], test_mirror_column[:min_len])
+    def score_vertical_pattern(self, pattern):
+        transposed = ["".join(r) for r in zip(*pattern)]
 
-                if (
-                    test_column
-                    and test_column[:min_len] == test_mirror_column[:min_len]
-                ):
-                    print("match", c, i)
-                    matches.append(i)
+        return self.score_horizontal_pattern(transposed)
 
-        if matches:
-            # get match where value equals len(pattern)
-            get_matches = Counter(matches).most_common(1)
-            print("matches", Counter(matches))
-            print("get_matches", get_matches)
-            # most common + 1
+    def score_horizontal_pattern(self, pattern):
+        # compare 0 and 1, = i - 0 and i + 1, continue
+        # compare 1 and 2, 0 and 3 = i - 0 and i + 1, i - 1 and i + 2
+        # compare 2 and 3, 1 and 4, 0 and 5 = i - 0 and i + 1, i - 1 and i + 2, i - 2 and i + 3
+        # compare 3 and 4, 2 and 5, 0 and 6, 0 and 7 = i - 0 and i + 1, i - 1 and i + 2, i - 2 and i + 3, i - 3 and i + 4
 
-        return 0
+        for i, _ in enumerate(pattern):
+            remaining = len(pattern) - i
+            match = False
+            for j in range(remaining):
+                index1, index2 = i - j, i + j + 1
+                if index1 < 0:
+                    break
+                # print(i, j, ":", index1, index2)
+                if index1 > len(pattern) - 1 or index2 > len(pattern) - 1:
+                    continue
+                if pattern[index1] == pattern[index2]:
+                    match = True
+                    # print("match", index1, index2, pattern[index1])
+                else:
+                    match = False
+                    break
 
-    def score_odd_pattern(self, pattern):
-        # find horizontal reflection
-        row_len = len(pattern[0])
-        matches = []
-        for c in range(row_len):
-            column = [line[c] for line in pattern]
-            print(c, column)
-            for i in range(len(column)):
-                test_column = column[:i]
-                test_mirror_column = column[i:]
-                min_len = min(len(test_column), len(test_mirror_column))
-                print(test_column[:min_len], test_mirror_column[:min_len])
-                # min_len = min(len(test_column), len(test_reversed_column))
-                if (
-                    test_column
-                    and test_column[:min_len] == test_mirror_column[:min_len]
-                ):
-                    print("match", c, i)
-                    matches.append(i)
+            if match:
+                # print("match", i, pattern[i])
+                return i + 1
 
-        if matches:
-            # get match where value equals len(pattern[0])
-            get_matches = Counter(matches).most_common(1)
-            print("matches", Counter(matches))
-            print("get_matches", get_matches)
-            # most common + 1
-        return 0
+        return None
 
     def parse_data(self):
         pattern = []
