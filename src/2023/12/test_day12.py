@@ -22,7 +22,7 @@ def test_day12():
 @pytest.mark.parametrize(
     "line,expected",
     [
-        # ("???.### 1,1,3", 1),
+        ("???.### 1,1,3", 1),
         # (".??..??...?##. 1,1,3", 4),
         # ("?#?#?#?#?#?#?#? 1,3,1,6", 1),
         ("????.#...#... 4,1,1", 1),
@@ -35,5 +35,21 @@ def test_arrangement(line, expected):
     program = Day12(data)
 
     result = program.possible_arrangements(line)
+
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "line,groups,expected",
+    [
+        ("####.#...#...", [4, 1, 1], True),
+        ("????.######..#####.", [1, 6, 5], False),
+    ],
+)
+def test_match(line, groups, expected):
+    data = read_txt(line)
+    program = Day12(data)
+
+    result = program.is_match(line, groups)
 
     assert result == expected

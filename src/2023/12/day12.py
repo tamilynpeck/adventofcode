@@ -1,4 +1,6 @@
-from itertools import combinations_with_replacement
+OPERATIONAL = "."
+DAMAGED = "#"
+UNKNOWN = "?"
 
 
 class Day12:
@@ -13,38 +15,36 @@ class Day12:
         pass
 
     def possible_arrangements(self, line):
-        springs, records = line.split(" ")
-        records = [int(i) for i in records.split(",")]
-        # springs = [c for c in springs.split(".") if c]
-        print(springs, records)
+        springs, damaged_groups = line.split(" ")
+        damaged_groups = [int(i) for i in damaged_groups.split(",")]
+        damaged_parts = ["".join([DAMAGED * i]) for i in damaged_groups]
+        max_gaps = len(damaged_parts) + 1
+
+        print(springs, damaged_groups)
+        print(damaged_parts)
+        print(max_gaps)
+
         arrangements = 0
-
-        # if len(springs) == len(records):
-        #     matches = [len(spring) == records[i] for i, spring in enumerate(springs)]
-        #     if all(matches):
-        #         return 1
-        operational = "."
-        operational_index = [i for i, c in enumerate(springs) if c == operational]
-        # print(operational_index)
-        # options, 1, 2, 3, operational, broken, unknown
-        operational = 1
-        broken = 2
-        # where the records line up with the springs
-
-        test = 0
+        operational_index = [i for i, c in enumerate(springs) if c == OPERATIONAL]
+        # solve for unknowns
+        # has to be at least one operational between each damaged part
         print(len(springs))
-        combinations = combinations_with_replacement([1, 2], len(springs))
 
-        for comb in list(combinations):
-            if test > 10:
-                break
-            if not all(comb[i] == operational for i in operational_index):
-                # print("not all", comb)
-                # test += 1
-                continue
-            test += 1
-
-            print(comb)
-            # break
+        if Day12.is_match(springs.replace(UNKNOWN, DAMAGED), damaged_groups):
+            arrangements += 1
 
         return arrangements
+
+    @staticmethod
+    def is_match(pattern, damaged_groups):
+        print("is_match", pattern, damaged_groups)
+        counts = []
+        group_len = 0
+        for l in pattern:
+            if l == DAMAGED:
+                group_len += 1
+            if l != DAMAGED and group_len > 0:
+                counts.append(group_len)
+                group_len = 0
+
+        return counts == damaged_groups
