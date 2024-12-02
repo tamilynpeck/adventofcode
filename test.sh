@@ -1,7 +1,7 @@
-year=2023
+year=2024
 day=1
 
-while getopts y:d: flag 
+while getopts y:d: flag
 do
     case "${flag}" in
         y) year=${OPTARG};;
