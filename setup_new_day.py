@@ -60,15 +60,28 @@ test_data = f"""import pytest
 from utils import read_txt
 from day{day} import Day{day}
 
-test_data = ""
 
-def test_day{day}():
+test_data = \"\"\"
+\"\"\"
+
+
+def test_part_one():
     data = read_txt(test_data)
     program = Day{day}(data)
 
     result = program.solve_part_one()
 
     assert result == 0
+
+
+# def test_part_two():
+#     data = read_txt(test_data)
+#     program = Day{day}(data)
+
+#     result = program.solve_part_two()
+
+#     assert result == 0
+
 
 @pytest.mark.parametrize(
     "line,expected",

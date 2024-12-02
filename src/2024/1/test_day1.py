@@ -2,26 +2,36 @@ import pytest
 from utils import read_txt
 from day1 import Day1
 
-test_data = ""
 
-def test_day1():
+test_data = """3   4
+4   3
+2   5
+1   3
+3   9
+3   3"""
+
+
+def test_data_parsing():
+    data = read_txt(test_data)
+    program = Day1(data)
+
+    assert program.left_list == [3, 4, 2, 1, 3, 3]
+    assert program.right_list == [4, 3, 5, 3, 9, 3]
+
+
+def test_part_one():
     data = read_txt(test_data)
     program = Day1(data)
 
     result = program.solve_part_one()
 
-    assert result == 0
+    assert result == 11
 
-@pytest.mark.parametrize(
-    "line,expected",
-    [
-        ("line", "expected"),
-    ],
-)
-def test_program_function(line, expected):
-    data = read_txt(line)
+
+def test_part_two():
+    data = read_txt(test_data)
     program = Day1(data)
 
-    result = program.test(line)
+    result = program.solve_part_two()
 
-    assert result == expected
+    assert result == 31
