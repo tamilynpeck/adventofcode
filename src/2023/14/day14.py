@@ -19,36 +19,27 @@ class Day14:
             self.roll_west()
             self.roll_south()
             self.roll_east()
-
         return self.get_total_load()
 
     def get_total_load(self):
-        total_load = []
+        total_load = 0
         number_of_rows = len(self.data)
         for r, line in enumerate(self.data):
-            for c, cell in enumerate(line):
+            for cell in line:
                 if cell == "O":
-                    total_load.append(number_of_rows - r)
-
-        return sum(total_load)
+                    total_load += number_of_rows - r
+        return total_load
 
     def roll(self):
-        for r, line in enumerate(self.data):
-            # print(r, line)
-            for c, cell in enumerate(line):
-                if cell != "O" or r == 0:
-                    continue
-
-                for i in range(r + 1):
-                    current_row = r - i
-                    above_row = r - (i + 1)
-                    # print(i, current_row, above_row, "".join(self.data[above_row]))
-                    if current_row == 0 or self.data[above_row][c] == "#":
-                        break
-                    if self.data[above_row][c] == "O":
-                        continue
-                    self.data[above_row][c] = "O"
-                    self.data[current_row][c] = "."
+        for r in range(1, len(self.data)):
+            for c in range(len(self.data[r])):
+                if self.data[r][c] == "O":
+                    for i in range(r, 0, -1):
+                        if self.data[i-1][c] == "#":
+                            break
+                        if self.data[i-1][c] == ".":
+                            self.data[i-1][c] = "O"
+                            self.data[i][c] = "."
 
     def roll_north(self):
         self.roll()

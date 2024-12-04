@@ -2,6 +2,7 @@ import pytest
 from utils import read_txt
 from day14 import Day14
 
+
 test_data = """O....#....
 O.OO#....#
 .....##...
