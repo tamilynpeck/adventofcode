@@ -9,7 +9,7 @@ class Day4:
         for r, row in enumerate(self.data):
             for c, char in enumerate(row):
                 if char == "X":
-                    result  = self.search_for_xmas(r, c)
+                    result = self.search_for_xmas(r, c)
                     if result > 0:
                         print("found xmas", r, c)
                         xmas_count += result
