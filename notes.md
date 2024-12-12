@@ -34,3 +34,7 @@ day 22
 day 23
 
 day 24
+
+# 2024
+
+Day 11 Memoization
