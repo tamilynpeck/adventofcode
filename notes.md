@@ -37,4 +37,8 @@ day 24
 
 # 2024
 
-Day 11 Memoization
+Day 6 - Didn't realize I had a loop.
+
+Day 9 ?
+
+Day 11 Memoization?
