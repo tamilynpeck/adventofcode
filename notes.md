@@ -1,6 +1,6 @@
-Algorithm Notes
+# Algorithm Notes
 
-2023
+## 2023
 
 day 12
 dynamic-programming
@@ -35,10 +35,12 @@ day 23
 
 day 24
 
-# 2024
+## 2024
 
 Day 6 - Didn't realize I had a loop.
 
 Day 9 ?
 
 Day 11 Memoization?
+
+Day 13 - Linear Algebra...
