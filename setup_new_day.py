@@ -61,8 +61,7 @@ from utils import read_txt
 from day{day} import Day{day}
 
 
-test_data = \"\"\"
-\"\"\"
+test_data = \"\"\"\"\"\"
 
 
 def test_part_one():
