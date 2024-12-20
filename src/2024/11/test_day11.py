@@ -3,7 +3,6 @@ from utils import read_txt
 from day11 import Day11
 
 
-# test_data = """0 1 10 99 999"""
 test_data = "125 17"
 
 
@@ -25,45 +24,51 @@ def test_part_one():
     assert result == 55312
 
 
-# def test_part_two():
-#     data = read_txt(test_data)
-#     program = Day11(data)
+def test_part_two():
+    data = read_txt(test_data)
+    program = Day11(data)
 
-#     result = program.solve_part_two()
+    result = program.solve_part_two()
 
-#     assert result
+    assert result
 
 
 @pytest.mark.parametrize(
     "line,expected",
     [
-        ([125, 17], [253000, 1, 7]),
+        ({125: 1, 17: 1}, {253000: 1, 1: 1, 7: 1}),
         (
-            [1036288, 7, 2, 20, 24, 4048, 1, 4048, 8096, 28, 67, 60, 32],
-            [
-                2097446912,
-                14168,
-                4048,
-                2,
-                0,
-                2,
-                4,
-                40,
-                48,
-                2024,
-                40,
-                48,
-                80,
-                96,
-                2,
-                8,
-                6,
-                7,
-                6,
-                0,
-                3,
-                2,
-            ],
+            {
+                1036288: 1,
+                7: 1,
+                2: 1,
+                20: 1,
+                24: 1,
+                4048: 1,
+                1: 1,
+                8096: 1,
+                28: 1,
+                67: 1,
+                60: 1,
+                32: 1,
+            },
+            {
+                2097446912: 1,
+                14168: 1,
+                4048: 1,
+                2: 4,
+                0: 2,
+                4: 1,
+                40: 1,
+                48: 1,
+                2024: 1,
+                80: 1,
+                96: 1,
+                8: 1,
+                6: 2,
+                7: 1,
+                3: 1,
+            },
         ),
     ],
 )
