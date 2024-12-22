@@ -43,4 +43,8 @@ Day 9 ?
 
 Day 11 Memoization?
 
+Day 12 - Union Find?
+
 Day 13 - Linear Algebra...
+
+dijkstra's algorithm?
