@@ -24,13 +24,13 @@ def test_part_one():
     assert result == 6
 
 
-# def test_part_two():
-#     data = read_txt(test_data)
-#     program = Day19(data)
+def test_part_two():
+    data = read_txt(test_data)
+    program = Day19(data)
 
-#     result = program.solve_part_two()
+    result = program.solve_part_two()
 
-#     assert result == 0
+    assert result == 16
 
 
 @pytest.mark.parametrize(
@@ -70,5 +70,27 @@ def test_program_function_real_data(line, expected):
     program = Day19(data)
 
     result = program.is_possible(line)
+
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "line,expected",
+    [
+        ("brwrr", 2),
+        ("bggr", 1),
+        ("gbbr", 4),
+        ("rrbgbr", 6),
+        ("ubwu", 0),
+        ("bwurrg", 1),
+        ("brgr", 2),
+        ("bbrgwb", 0),
+    ],
+)
+def test_program_function(line, expected):
+    data = read_txt(test_data)
+    program = Day19(data)
+
+    result = program.how_many_possible(line)
 
     assert result == expected

@@ -24,6 +24,26 @@ def test_part_two():
     assert result == 2858
 
 
+def test_part_two_test_case_1():
+    test_data = """1313165"""
+    data = read_txt(test_data)
+    program = Day9(data)
+
+    result = program.solve_part_two()
+
+    assert result == 169
+
+
+def test_part_two_test_case_2():
+    test_data = """9953877292941"""
+    data = read_txt(test_data)
+    program = Day9(data)
+
+    result = program.solve_part_two()
+
+    assert result == 5768
+
+
 @pytest.mark.parametrize(
     "line,expected",
     [
@@ -214,6 +234,63 @@ def test_free_disk_space(line, expected):
             ],
             1928,
         ),
+        (
+            [
+                0,
+                0,
+                9,
+                9,
+                2,
+                1,
+                1,
+                1,
+                7,
+                7,
+                7,
+                ".",
+                4,
+                4,
+                ".",
+                3,
+                3,
+                3,
+                ".",
+                ".",
+                ".",
+                ".",
+                5,
+                5,
+                5,
+                5,
+                ".",
+                6,
+                6,
+                6,
+                6,
+                ".",
+                ".",
+                ".",
+                ".",
+                ".",
+                8,
+                8,
+                8,
+                8,
+                ".",
+                ".",
+            ],
+            2858,
+        ),
+        (
+            [
+                0,
+                0,
+                9,
+                9,
+                ".",
+            ],
+            45,
+        ),
     ],
 )
 def test_checksum(line, expected):
@@ -314,12 +391,22 @@ def test_checksum(line, expected):
                 [2, 2, 2, 2, 2],
             ],
         ),
+        (
+            [[0, 0], [".", ".", ".", "."], [11, 11]],
+            [[0, 0], [11, 11], [".", ".", ".", "."]],
+        ),
+        (
+            [[0, 0], [".", ".", ".", "."], [11, 11, 11]],
+            [[0, 0], [".", ".", ".", "."], [11, 11, 11]],
+        ),
+        (
+            [[0, 0], [".", ".", ".", "."], [113]],
+            [[0, 0], [113], [".", ".", ".", "."]],
+        ),
     ],
 )
 def test_file_compacting_part_two(line, expected):
     program = Day9("123")
-    # line = [int(x) if x.isdigit() else x for x in line]
-    # expected = [int(x) if x.isdigit() else x for x in expected]
 
     result = program.file_compacting_part_two(line)
 
@@ -349,5 +436,40 @@ def test_individual_blocks_part_two(numbers, expected):
     program = Day9("123")
 
     result = program.individual_blocks_part_two(numbers)
+
+    assert result == expected
+
+
+@pytest.mark.parametrize(
+    "line,expected",
+    [
+        (
+            [
+                [0, 0],
+                [9, 9],
+                [2],
+                [1, 1, 1],
+                [7, 7, 7],
+                ["."],
+                [4, 4],
+                ["."],
+                [3, 3, 3],
+                [".", ".", ".", "."],
+                [5, 5, 5, 5],
+                ["."],
+                [6, 6, 6, 6],
+                [".", ".", ".", ".", "."],
+                [8, 8, 8, 8],
+                [],
+                [".", "."],
+            ],
+            2858,
+        ),
+    ],
+)
+def test_checksum_part_two(line, expected):
+    program = Day9("123")
+
+    result = program.checksum_part_two(line)
 
     assert result == expected

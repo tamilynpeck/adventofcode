@@ -19,7 +19,13 @@ class Day19:
         return possible_designs
 
     def solve_part_two(self):
-        pass
+        possible_designs = 0
+        for i, design in enumerate(self.designs):
+            self.patterns = self.available
+            print(f"Checking design {i + 1} - {design}")
+            possible_designs += self.how_many_possible(design)
+
+        return possible_designs
 
     @cache
     def is_possible(self, design):
@@ -34,3 +40,17 @@ class Day19:
                     return True
 
         return False
+
+    @cache
+    def how_many_possible(self, design):
+        self.patterns = [a for a in self.patterns if a in design]
+
+        if len(design) == 0:
+            return 1
+        possible_designs = 0
+        for a in self.patterns:
+            if len(a) <= len(design) and a == design[: len(a)]:
+                # print(f"{design} Found " + a, "Starting with " + design[len(a) :])
+                possible_designs += self.is_possible(design.removeprefix(a))
+
+        return possible_designs
