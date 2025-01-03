@@ -47,4 +47,7 @@ Day 12 - Union Find?
 
 Day 13 - Linear Algebra...
 
-dijkstra's algorithm?
+Day 16 - dijkstra's algorithm?
+
+Day 18 - dijkstra's algorithm
+

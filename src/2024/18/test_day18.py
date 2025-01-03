@@ -39,13 +39,13 @@ def test_part_one():
     assert result == 22
 
 
-# def test_part_two():
-#     data = read_txt(test_data)
-#     program = Day18(data)
+def test_part_two():
+    data = read_txt(test_data)
+    program = Day18(data)
 
-#     result = program.solve_part_two()
+    result = program.solve_part_two(size=6)
 
-#     assert result == 0
+    assert result == (6, 1)
 
 
 # @pytest.mark.parametrize(
