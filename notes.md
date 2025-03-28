@@ -51,3 +51,4 @@ Day 16 - dijkstra's algorithm?
 
 Day 18 - dijkstra's algorithm
 
+Day 22 - For Part 2, count how many times each sequence of changes appears, and test the top 1% of sequences, keeping the best result?
