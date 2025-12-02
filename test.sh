@@ -1,5 +1,5 @@
-year=2025
-day=1
+year=$(date +%Y)
+day=$(date +%-d)
 
 while getopts y:d: flag
 do
