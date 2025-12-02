@@ -1,4 +1,4 @@
-year=2024
+year=2025
 day=1
 
 while getopts y:d: flag
