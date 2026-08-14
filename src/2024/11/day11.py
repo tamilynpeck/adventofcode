@@ -37,3 +37,6 @@ class Day11:
         else:
             value = stone * 2024
             return [value]
+
+Hello preddy laydee. I wuvs u sew much. kisses!
+    qunuwbmledore

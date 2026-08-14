@@ -35,7 +35,6 @@ class Day15:
         return self.count_box_scores()
 
     def handle_move(self, direction):
-
         move_to = (
             self.location[0] + DIRECTIONS[direction][0],
             self.location[1] + DIRECTIONS[direction][1],

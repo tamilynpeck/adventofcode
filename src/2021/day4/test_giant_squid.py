@@ -10,7 +10,6 @@ numbers, boards = parse_bingo_input(input)
 
 
 def test_input_import():
-
     assert numbers == [
         "7",
         "4",

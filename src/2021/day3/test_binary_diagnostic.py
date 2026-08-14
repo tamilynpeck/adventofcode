@@ -18,11 +18,11 @@ test_input = [
 
 diagnostic = BinaryDiagnostic(test_input)
 
+
 def test_gamma_rate():
-    
-    assert diagnostic.gamma == '10110'
+    assert diagnostic.gamma == "10110"
     assert int(diagnostic.gamma, 2) == 22
-    assert diagnostic.epsilon == '01001'
+    assert diagnostic.epsilon == "01001"
     assert int(diagnostic.epsilon, 2) == 9
     assert diagnostic.power_consumption == 198
 

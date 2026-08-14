@@ -4,7 +4,6 @@ class Day12:
         print(self.data)
 
     def solve_part_one(self):
-
         pass
 
     def solve_part_two(self):

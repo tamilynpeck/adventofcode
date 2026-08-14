@@ -35,10 +35,10 @@ class Day14:
             for c in range(len(self.data[r])):
                 if self.data[r][c] == "O":
                     for i in range(r, 0, -1):
-                        if self.data[i-1][c] == "#":
+                        if self.data[i - 1][c] == "#":
                             break
-                        if self.data[i-1][c] == ".":
-                            self.data[i-1][c] = "O"
+                        if self.data[i - 1][c] == ".":
+                            self.data[i - 1][c] = "O"
                             self.data[i][c] = "."
 
     def roll_north(self):

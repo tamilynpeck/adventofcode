@@ -17,7 +17,7 @@ class Day3:
         result = 0
         enabled = True
         for match in matches:
-            if match == "do()" :
+            if match == "do()":
                 enabled = True
             elif match == "don't()":
                 enabled = False

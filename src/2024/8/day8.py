@@ -30,7 +30,6 @@ class Day8:
         # continue the paths to create anti_nodes
         for _, value in paths.items():
             for start, end in value:
-
                 distance = (end[0] - start[0], end[1] - start[1])
                 reverse_distance = (distance[0] * -1, distance[1] * -1)
                 print(start, end, " : ", distance, reverse_distance)
