@@ -57,7 +57,7 @@ create_file(day_path, data)
 
 test_path = Path(base_path, f"test_day{day}.py")
 test_data = f"""import pytest
-from utils import read_txt
+from utils import read_file, read_txt
 from day{day} import Day{day}
 
 
@@ -95,6 +95,15 @@ def test_program_function(line, expected):
     result = program.test(line)
 
     assert result == expected
+
+
+def test_solutions():
+    data = read_file("input.txt")
+    program = Day{day}(data)
+    # result = program.solve_part_one()
+    # assert result == x
+    # result = program.solve_part_two()
+    # assert result == x
 """
 create_file(test_path, test_data)
 

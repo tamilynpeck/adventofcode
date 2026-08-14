@@ -1,13 +1,5 @@
-year=$(date +%Y)
-day=$(date +%-d)
-
-while getopts y:d: flag
-do
-    case "${flag}" in
-        y) year=${OPTARG};;
-        d) day=${OPTARG};;
-    esac
-done
+year=${1:-$(date +%Y)}
+day=${2:-$(date +%-d)}
 
 echo "Year: $year Day: $day"
 
