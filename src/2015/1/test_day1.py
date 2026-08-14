@@ -1,5 +1,5 @@
 import pytest
-from utils import read_txt
+from utils import read_file, read_txt
 from day1 import Day1
 
 
@@ -40,3 +40,12 @@ def test_part_two_examples(line, expected):
     result = program.solve_part_two()
 
     assert result == expected
+
+
+def test_solutions():
+    data = read_file("input.txt")
+    program = Day1(data)
+    result = program.solve_part_one()
+    assert result == 232
+    result = program.solve_part_two()
+    assert result == 1783
